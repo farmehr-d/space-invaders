@@ -189,7 +189,7 @@ function draw() {
   if (shootingTick >= shootingThreshold) {
     let enemy = enemies[Math.round(random(0, 4))];
     if (enemy[4] === true) {
-      eb.push([...enemy]);
+      eb.push([enemy[0] + enemy[2] / 2, enemy[1] + enemy[3] / 2]);
       shootingTick = random(0, shootingThreshold / 2);
     }
   } else {
