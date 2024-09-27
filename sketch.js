@@ -2,7 +2,7 @@ let img;
 let x = 400;
 let y = 575;
 let speed = 5;
-let enemyspeed = 1;
+let enemyspeed = 3;
 let direction = 1;
 let shootaxis = [0, 1];
 let shoot = false;
@@ -135,6 +135,11 @@ function draw() {
 
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
+
+    if (enemy[4] === true && enemy[1] >= y - 30) {
+      tempGameover = true;
+    }
+
     if (enemy[4] === true) {
       if (enemy[0] + enemy[2] > width) {
         for (let j = 0; j < enemies.length; j++) {
@@ -352,7 +357,6 @@ function draw() {
         }
     }
 
-    
     // enemy shoots me
     if (
       enemybullet[0] >= x - 30 &&
