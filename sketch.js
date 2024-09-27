@@ -14,6 +14,10 @@ let tempGameover = false;
 let count = 3;
 let ShieldXaxis = [570, 420, 270, 120];
 let shieldy = 490;
+let ShieldExistence1 = true;
+let ShieldExistence2 = true;
+let ShieldExistence3 = true;
+let ShieldExistence4 = true;
 let existence = true;
 let enemyExists = false;
 let shootingTick = 0;
@@ -21,7 +25,10 @@ let shootingThreshold = 60;
 let ShieldWidth = 70;
 let ShieldHeight = 25;
 let score = 0;
-
+let ShieldHP1 = 4;
+let ShieldHP2 = 4;
+let ShieldHP3 = 4;
+let ShieldHP4 = 4;
 // Load the image.
 function preload() {
   img = loadImage("/assets/Background.png");
@@ -50,17 +57,37 @@ function draw() {
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
 
   //shields
-  fill(213, 245, 221);
-  rect(ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
+  if (ShieldExistence1 === true) {
+    fill(213, 245, 221);
+    rect(ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
+    textSize(20);
+    fill(37, 35, 122);
+    text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
+  }
 
-  fill(213, 245, 221);
-  rect(ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight);
+  if (ShieldExistence2 === true) {
+    fill(213, 245, 221);
+    rect(ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight);
+    textSize(20);
+    fill(37, 35, 122);
+    text(ShieldHP2, ShieldXaxis[1] + 30, shieldy + 20);
+  }
 
-  fill(213, 245, 221);
-  rect(ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight);
+  if (ShieldExistence3 === true) {
+    fill(213, 245, 221);
+    rect(ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight);
+    textSize(20);
+    fill(37, 35, 122);
+    text(ShieldHP3, ShieldXaxis[2] + 30, shieldy + 20);
+  }
 
-  fill(213, 245, 221);
-  rect(ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight);
+  if (ShieldExistence4 === true) {
+    fill(213, 245, 221);
+    rect(ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight);
+    textSize(20);
+    fill(37, 35, 122);
+    text(ShieldHP4, ShieldXaxis[3] + 30, shieldy + 20);
+  }
 
   // the value of enemy existence is being reset
   enemyExists = false;
@@ -127,7 +154,7 @@ function draw() {
   for (let l = 0; l < enemies.length; l++) {
     let enemy = enemies[l];
 
-    // when enemy is being hit
+    //when enemy is being hit
     if (
       shoot === true &&
       enemy[4] === true &&
@@ -136,7 +163,8 @@ function draw() {
       shootaxis[1] >= enemy[1] &&
       shootaxis[1] <= enemy[1] + enemy[3]
     ) {
-      score = score + 50;
+      score = score + 1;
+      score = score * 2;
       shoot = false;
       enemy[4] = false;
     }
@@ -208,8 +236,80 @@ function draw() {
       eb.splice(i, 1);
     }
 
-    // enemy shoots me
+    // enemy shoots shield
 
+if(ShieldExistence1 === true){
+
+    if (
+      enemybullet[0] >= ShieldXaxis[0] &&
+      enemybullet[0] <= ShieldXaxis[0] + ShieldWidth &&
+      enemybullet[1] >= shieldy
+    ) {
+      eb.splice(i, 1);
+      ShieldHP1 = ShieldHP1 - 1;
+    }
+    if (ShieldHP1 === 0) {
+      ShieldExistence1 = false;
+    }
+  }
+
+if(ShieldExistence2===true){
+
+    if (
+      enemybullet[0] >= ShieldXaxis[1] &&
+      enemybullet[0] <= ShieldXaxis[1] + ShieldWidth &&
+      enemybullet[1] >= shieldy
+    ) {
+      eb.splice(i, 1);
+      ShieldHP2 = ShieldHP2 - 1;
+    }
+
+    if (ShieldHP2 === 0) {
+      ShieldExistence2 = false
+    }
+  }
+
+    if(ShieldExistence3 === true){
+    if (
+      enemybullet[0] >= ShieldXaxis[2] &&
+      enemybullet[0] <= ShieldXaxis[2] + ShieldWidth &&
+      enemybullet[1] >= shieldy
+    ) {
+      eb.splice(i, 1);
+      ShieldHP3 = ShieldHP3 - 1;
+      
+    }
+    if (ShieldHP3 === 0){
+      ShieldExistence3 = false
+    
+    }
+  }
+
+if (ShieldExistence4 === true){
+
+
+    if (
+      enemybullet[0] >= ShieldXaxis[3] &&
+      enemybullet[0] <= ShieldXaxis[3] + ShieldWidth &&
+      enemybullet[1] >= shieldy
+    ) {
+      eb.splice(i, 1);
+      ShieldHP4 = ShieldHP4 - 1;
+      
+    }
+    if (ShieldHP4 === 0){
+      ShieldExistence4 = false
+    
+    }
+  }
+
+
+
+
+
+
+
+    // enemy shoots me
     if (
       enemybullet[0] >= x - 30 &&
       enemybullet[0] <= x + 30 &&
