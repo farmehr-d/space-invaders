@@ -192,7 +192,7 @@ function draw() {
     rect(x - 30, y, 60, 20);
   }
 
-  //bullet
+  //spaceship shooting
   if (shoot === true && tempGameover === false) {
     fill(0, 251, 255);
     rect(shootaxis[0] - 1, shootaxis[1], 2, 20);
@@ -238,77 +238,121 @@ function draw() {
 
     // enemy shoots shield
 
-if(ShieldExistence1 === true){
-
-    if (
-      enemybullet[0] >= ShieldXaxis[0] &&
-      enemybullet[0] <= ShieldXaxis[0] + ShieldWidth &&
-      enemybullet[1] >= shieldy
-    ) {
-      eb.splice(i, 1);
-      ShieldHP1 = ShieldHP1 - 1;
-    }
-    if (ShieldHP1 === 0) {
-      ShieldExistence1 = false;
-    }
-  }
-
-if(ShieldExistence2===true){
-
-    if (
-      enemybullet[0] >= ShieldXaxis[1] &&
-      enemybullet[0] <= ShieldXaxis[1] + ShieldWidth &&
-      enemybullet[1] >= shieldy
-    ) {
-      eb.splice(i, 1);
-      ShieldHP2 = ShieldHP2 - 1;
+    if (ShieldExistence1 === true) {
+      if (
+        enemybullet[0] >= ShieldXaxis[0] &&
+        enemybullet[0] <= ShieldXaxis[0] + ShieldWidth &&
+        enemybullet[1] >= shieldy
+      ) {
+        eb.splice(i, 1);
+        ShieldHP1 = ShieldHP1 - 1;
+      }
+      if (ShieldHP1 === 0) {
+        ShieldExistence1 = false;
+      }
     }
 
-    if (ShieldHP2 === 0) {
-      ShieldExistence2 = false
-    }
-  }
+    if (ShieldExistence2 === true) {
+      if (
+        enemybullet[0] >= ShieldXaxis[1] &&
+        enemybullet[0] <= ShieldXaxis[1] + ShieldWidth &&
+        enemybullet[1] >= shieldy
+      ) {
+        eb.splice(i, 1);
+        ShieldHP2 = ShieldHP2 - 1;
+      }
 
-    if(ShieldExistence3 === true){
-    if (
-      enemybullet[0] >= ShieldXaxis[2] &&
-      enemybullet[0] <= ShieldXaxis[2] + ShieldWidth &&
-      enemybullet[1] >= shieldy
-    ) {
-      eb.splice(i, 1);
-      ShieldHP3 = ShieldHP3 - 1;
-      
+      if (ShieldHP2 === 0) {
+        ShieldExistence2 = false;
+      }
     }
-    if (ShieldHP3 === 0){
-      ShieldExistence3 = false
+
+    if (ShieldExistence3 === true) {
+      if (
+        enemybullet[0] >= ShieldXaxis[2] &&
+        enemybullet[0] <= ShieldXaxis[2] + ShieldWidth &&
+        enemybullet[1] >= shieldy
+      ) {
+        eb.splice(i, 1);
+        ShieldHP3 = ShieldHP3 - 1;
+      }
+      if (ShieldHP3 === 0) {
+        ShieldExistence3 = false;
+      }
+    }
+
+    if (ShieldExistence4 === true) {
+      if (
+        enemybullet[0] >= ShieldXaxis[3] &&
+        enemybullet[0] <= ShieldXaxis[3] + ShieldWidth &&
+        enemybullet[1] >= shieldy
+      ) {
+        eb.splice(i, 1);
+        ShieldHP4 = ShieldHP4 - 1;
+      }
+      if (ShieldHP4 === 0) {
+        ShieldExistence4 = false;
+      }
+    }
+    // spacship shoots shields
+
+    if (ShieldExistence1 === true) {
+      if (
+        shootaxis[0] >= ShieldXaxis[0] &&
+        shootaxis[0] <= ShieldXaxis[0] + ShieldWidth &&
+        shootaxis[1] <= shieldy + ShieldHeight / 2
+      )
+        if (shoot === true) {
+          {
+            shoot = false;
+            ShieldHP1 = ShieldHP1 - 1;
+          }
+        }
+    }
+
+    if (ShieldExistence2 === true) {
+      if (
+        shootaxis[0] >= ShieldXaxis[1] &&
+        shootaxis[0] <= ShieldXaxis[1] + ShieldWidth &&
+        shootaxis[1] <= shieldy + ShieldHeight / 2
+      )
+        if (shoot === true) {
+          {
+            shoot = false;
+            ShieldHP2 = ShieldHP2 - 1;
+          }
+        }
+    }
+
+    if (ShieldExistence3 === true) {
+      if (
+        shootaxis[0] >= ShieldXaxis[2] &&
+        shootaxis[0] <= ShieldXaxis[2] + ShieldWidth &&
+        shootaxis[1] <= shieldy + ShieldHeight / 2
+      )
+        if (shoot === true) {
+          {
+            shoot = false;
+            ShieldHP3 = ShieldHP3 - 1;
+          }
+        }
+    }
+
+    if (ShieldExistence4 === true) {
+      if (
+        shootaxis[0] >= ShieldXaxis[3] &&
+        shootaxis[0] <= ShieldXaxis[3] + ShieldWidth &&
+        shootaxis[1] <= shieldy + ShieldHeight / 2
+      )
+        if (shoot === true) {
+          {
+            shoot = false;
+            ShieldHP4 = ShieldHP4 - 1;
+          }
+        }
+    }
+
     
-    }
-  }
-
-if (ShieldExistence4 === true){
-
-
-    if (
-      enemybullet[0] >= ShieldXaxis[3] &&
-      enemybullet[0] <= ShieldXaxis[3] + ShieldWidth &&
-      enemybullet[1] >= shieldy
-    ) {
-      eb.splice(i, 1);
-      ShieldHP4 = ShieldHP4 - 1;
-      
-    }
-    if (ShieldHP4 === 0){
-      ShieldExistence4 = false
-    
-    }
-  }
-
-
-
-
-
-
-
     // enemy shoots me
     if (
       enemybullet[0] >= x - 30 &&
@@ -334,6 +378,6 @@ if (ShieldExistence4 === true){
   textStyle(NORMAL);
   fill(0, 255, 0);
   textSize(20);
-  text("score:" + score, 200, 15);
+  text("score: " + score, 200, 15);
   text("HP: " + count, 0, 15);
 }
