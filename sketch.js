@@ -135,7 +135,7 @@ function draw() {
 
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
-
+    // when enemy touches player and kills
     if (enemy[4] === true && enemy[1] >= y - 30) {
       tempGameover = true;
     }
