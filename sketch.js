@@ -31,7 +31,7 @@ let ShieldHP3 = 4;
 let ShieldHP4 = 4;
 // Load the image.
 function preload() {
-  img = loadImage("/assets/Background.png");
+  img = loadImage("assets/Background.png");
 }
 
 function setup() {
