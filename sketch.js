@@ -29,6 +29,47 @@ let ShieldHP1 = 4;
 let ShieldHP2 = 4;
 let ShieldHP3 = 4;
 let ShieldHP4 = 4;
+let ufo;
+
+class UFO {
+  constructor() {
+    this.x = 4000;
+    this.y = 20;
+    this.width = 80;
+    this.height = 20;
+    this.isDead = false;
+  }
+
+  kill() {
+    this.isDead = true;
+  }
+
+  isColiding(x, y) {
+    if (
+      x >= this.x &&
+      y >= this.y &&
+      x <= this.x + this.width &&
+      y <= this.y + this.height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  move() {
+    this.x = this.x - 5;
+  }
+
+  show() {
+    if (this.isDead === false) {
+      noStroke();
+      fill(235, 52, 210);
+      rect(this.x, this.y, this.width, this.height);
+    }
+  }
+}
+
 // Load the image.
 function preload() {
   img = loadImage("assets/Background.png");
@@ -36,6 +77,8 @@ function preload() {
 
 function setup() {
   createCanvas(800, 600);
+
+  ufo = new UFO();
 
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 5; j++) {
@@ -55,6 +98,9 @@ function draw() {
 
   // Draw the image and scale it to fit within the canvas.
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
+
+  ufo.move();
+  ufo.show();
 
   //shields
   if (ShieldExistence1 === true) {
@@ -168,8 +214,7 @@ function draw() {
       shootaxis[1] >= enemy[1] &&
       shootaxis[1] <= enemy[1] + enemy[3]
     ) {
-      score = score + 1;
-      score = score * 2;
+      score = score + 50;
       shoot = false;
       enemy[4] = false;
     }
@@ -205,6 +250,12 @@ function draw() {
 
     if (shootaxis[1] < -20) {
       shoot = false;
+    }
+
+    if (ufo.isColiding(shootaxis[0], shootaxis[1])) {
+      shoot = false
+      ufo.kill();
+      score = score + 1000 
     }
   }
 
