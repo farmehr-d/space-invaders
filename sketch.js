@@ -44,7 +44,7 @@ class UFO {
     this.isDead = true;
   }
 
-  isColiding(x, y) {
+  isColliding(x, y) {
     if (
       x >= this.x &&
       y >= this.y &&
@@ -252,7 +252,7 @@ function draw() {
       shoot = false;
     }
 
-    if (ufo.isColiding(shootaxis[0], shootaxis[1])) {
+    if (ufo.isColliding(shootaxis[0], shootaxis[1]) === true) {
       shoot = false
       ufo.kill();
       score = score + 1000 
