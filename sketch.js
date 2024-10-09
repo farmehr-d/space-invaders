@@ -283,7 +283,7 @@ function draw() {
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
     fill(250, 250, 250);
-    //enemy rect
+    //enemy bullet rect
     if (existence === true) {
       rect(enemybullet[0], enemybullet[1], 2, 15);
     }
