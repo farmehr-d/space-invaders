@@ -19,6 +19,7 @@ let ShieldExistence2 = true;
 let ShieldExistence3 = true;
 let ShieldExistence4 = true;
 let existence = true;
+//good variable name 
 let enemyExists = false;
 let shootingTick = 0;
 let shootingThreshold = 60;
@@ -283,7 +284,7 @@ function draw() {
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
     fill(250, 250, 250);
-    //enemy bullet rect
+    //enemy rect
     if (existence === true) {
       rect(enemybullet[0], enemybullet[1], 2, 15);
     }
