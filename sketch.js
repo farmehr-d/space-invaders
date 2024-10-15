@@ -1,35 +1,35 @@
 let img;
-let x = 400;
-let y = 575;
-let speed = 5;
-let enemyspeed = 3;
-let direction = 1;
-let shootaxis = [0, 1];
-let shoot = false;
-let position2 = [0, 40];
-let enemies = [];
+let x;
+let y;
+let speed;
+let enemyspeed;
+let direction;
+let shootaxis;
+let shoot;
+let position2;
+let enemies;
 //enemy bullet variable
-let eb = [];
-let tempGameover = false;
-let count = 3;
-let ShieldXaxis = [570, 420, 270, 120];
-let shieldy = 490;
-let ShieldExistence1 = true;
-let ShieldExistence2 = true;
-let ShieldExistence3 = true;
-let ShieldExistence4 = true;
-let existence = true;
-//good variable name 
-let enemyExists = false;
-let shootingTick = 0;
-let shootingThreshold = 60;
-let ShieldWidth = 70;
-let ShieldHeight = 25;
-let score = 0;
-let ShieldHP1 = 4;
-let ShieldHP2 = 4;
-let ShieldHP3 = 4;
-let ShieldHP4 = 4;
+let eb;
+let tempGameover;
+let count;
+let ShieldXaxis;
+let shieldy;
+let ShieldExistence1;
+let ShieldExistence2;
+let ShieldExistence3;
+let ShieldExistence4;
+let existence;
+//good variable name
+let enemyExists;
+let shootingTick;
+let shootingThreshold;
+let ShieldWidth;
+let ShieldHeight;
+let score;
+let ShieldHP1;
+let ShieldHP2;
+let ShieldHP3;
+let ShieldHP4;
 let ufo;
 
 class UFO {
@@ -78,6 +78,37 @@ function preload() {
 
 function setup() {
   createCanvas(800, 600);
+  x = 400;
+  y = 575;
+  speed = 5;
+  enemyspeed = 3;
+  direction = 1;
+  shootaxis = [0, 1];
+  shoot = false;
+  position2 = [0, 40];
+  enemies = [];
+  //enemy bul variable
+  eb = [];
+  tempGameover = false;
+  count = 3;
+  ShieldXaxis = [570, 420, 270, 120];
+  shieldy = 490;
+  ShieldExistence1 = true;
+  ShieldExistence2 = true;
+  ShieldExistence3 = true;
+  ShieldExistence4 = true;
+  existence = true;
+  //good variable name
+  enemyExists = false;
+  shootingTick = 0;
+  shootingThreshold = 60;
+  ShieldWidth = 70;
+  ShieldHeight = 25;
+  score = 0;
+  ShieldHP1 = 4;
+  ShieldHP2 = 4;
+  ShieldHP3 = 4;
+  ShieldHP4 = 4;
 
   ufo = new UFO();
 
@@ -151,6 +182,8 @@ function draw() {
     fill(0, 255, 0);
     textStyle(BOLD);
     text("You Win", width / 2 - 50, height / 2);
+    fill(58, 38, 240);
+    text("Press R to restart the game", width / 2 - 125, height / 2 +50);
   }
 
   //enemy render
@@ -221,6 +254,13 @@ function draw() {
     }
   }
 
+
+  if (keyIsDown(82) === true) {
+    setup()
+  }
+
+
+
   //spaceship movement
   if (keyIsDown(LEFT_ARROW) === true && x > 30) {
     x -= speed;
@@ -254,9 +294,9 @@ function draw() {
     }
 
     if (ufo.isColliding(shootaxis[0], shootaxis[1]) === true) {
-      shoot = false
+      shoot = false;
       ufo.kill();
-      score = score + 1000 
+      score = score + 1000;
     }
   }
 
@@ -428,6 +468,8 @@ function draw() {
     fill(237, 30, 26);
     textStyle(BOLD);
     text("Game Over", width / 2 - 50, height / 2);
+    fill(58, 38, 240);
+    text("Press R to restart the game", width / 2 - 125, height / 2 +50);
   }
 
   //HUD
