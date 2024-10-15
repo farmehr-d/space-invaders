@@ -73,7 +73,7 @@ class UFO {
 
 // Load the image.
 function preload() {
-  img = loadImage("assets/Background.png");
+  img = loadImage("assets/Planet-hell-background.jpg");
 }
 
 function setup() {
@@ -182,7 +182,7 @@ function draw() {
     fill(0, 255, 0);
     textStyle(BOLD);
     text("You Win", width / 2 - 50, height / 2);
-    fill(58, 38, 240);
+    fill(252, 240, 237);
     text("Press R to restart the game", width / 2 - 125, height / 2 +50);
   }
 
@@ -465,10 +465,9 @@ function draw() {
     }
   }
   if (tempGameover === true) {
-    fill(237, 30, 26);
+    fill(252, 240, 237);
     textStyle(BOLD);
     text("Game Over", width / 2 - 50, height / 2);
-    fill(58, 38, 240);
     text("Press R to restart the game", width / 2 - 125, height / 2 +50);
   }
 
