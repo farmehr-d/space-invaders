@@ -1,4 +1,8 @@
 let img;
+let spaceshipbulletImage;
+let enemy1Image;
+let enemy2Image;
+let spaceshipImage;
 let x;
 let y;
 let speed;
@@ -74,6 +78,26 @@ class UFO {
 // Load the image.
 function preload() {
   img = loadImage("assets/Planet-hell-background.jpg");
+  enemy1Image = loadImage("assets/Enemy1.png");
+  spaceshipImage = loadImage("assets/spaceship.png");
+  spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
+  enemy2Image = loadImage("assets/enemy2.png");
+}
+
+function enemySpawn() {
+  ufo = new UFO();
+  enemies = [];
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 5; j++) {
+      enemies.push([
+        position2[0] + j * 70,
+        position2[1] + i * 70,
+        35,
+        35,
+        true,
+      ]);
+    }
+  }
 }
 
 function setup() {
@@ -86,7 +110,7 @@ function setup() {
   shootaxis = [0, 1];
   shoot = false;
   position2 = [0, 40];
-  enemies = [];
+
   //enemy bul variable
   eb = [];
   tempGameover = false;
@@ -110,19 +134,7 @@ function setup() {
   ShieldHP3 = 4;
   ShieldHP4 = 4;
 
-  ufo = new UFO();
-
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 5; j++) {
-      enemies.push([
-        position2[0] + j * 70,
-        position2[1] + i * 70,
-        35,
-        35,
-        true,
-      ]);
-    }
-  }
+  enemySpawn();
 }
 
 function draw() {
@@ -130,7 +142,8 @@ function draw() {
 
   // Draw the image and scale it to fit within the canvas.
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
-
+  fill(0, 0, 0, 30);
+  rect(0, 0, width, height);
   ufo.move();
   ufo.show();
 
@@ -179,25 +192,44 @@ function draw() {
   }
 
   if (enemyExists === false) {
+    // continue button
+    if (keyIsDown(67) === true) {
+      enemySpawn();
+      enemyspeed = enemyspeed + 1;
+    }
+    // win transparent rect
+    fill(0, 0, 0, 200);
+    rect(400 / 2, height / 2 - 125, 400, 250);
     fill(0, 255, 0);
     textStyle(BOLD);
-    text("You Win", width / 2 - 50, height / 2);
-    fill(252, 240, 237);
-    text("Press R to restart the game", width / 2 - 125, height / 2 +50);
+    textSize(40);
+    text("You win", width / 2 - 80, height / 2 - 90);
+    textSize(20);
+    fill(255, 255, 255);
+    text("Press C to continue", width / 2 - 100, height / 2 + 30);
+    textSize(40);
+    fill(245, 170, 10);
+    let content = "score: " + score;
+    let tWidth = textWidth(content);
+    text(content, width / 2 - tWidth / 2, height / 2 - 40);
+    fill(255, 255, 255);
+    textSize(20);
+    text("Press R to restart the game", width / 2 - 125, height / 2 + 60);
   }
 
   //enemy render
   for (let i = 0; i < enemies.length; i++) {
     let enemy = enemies[i];
 
-    if (i < 1) {
-      fill(0, 0, 255);
-    } else if (i > 4) {
-      fill(255, 0, 0);
-    }
-
     if (enemy[4] === true) {
-      rect(enemy[0], enemy[1], enemy[2], enemy[3]);
+      if (i < 5) {
+        image(enemy2Image, enemy[0], enemy[1], 35, 35);
+        // fill(0, 0, 255);
+      } else {
+        // fill(255, 0, 0);
+        image(enemy1Image, enemy[0], enemy[1], 35, 35);
+        // rect(enemy[0], enemy[1], enemy[2], enemy[3]);
+      }
     }
     enemy[0] = enemy[0] + direction * enemyspeed;
   }
@@ -248,18 +280,18 @@ function draw() {
       shootaxis[1] >= enemy[1] &&
       shootaxis[1] <= enemy[1] + enemy[3]
     ) {
-      score = score + 50;
+      if (tempGameover == false) {
+        score = score + 50;
+      }
       shoot = false;
       enemy[4] = false;
     }
   }
 
-
+  //reset button
   if (keyIsDown(82) === true) {
-    setup()
+    setup();
   }
-
-
 
   //spaceship movement
   if (keyIsDown(LEFT_ARROW) === true && x > 30) {
@@ -280,13 +312,15 @@ function draw() {
   noStroke();
   if (tempGameover === false) {
     fill(0, 190, 0);
-    rect(x - 30, y, 60, 20);
+    image(spaceshipImage, x - 30, y, 60, 20);
+    //rect(x - 30, y, 60, 20);
   }
 
   //spaceship shooting
   if (shoot === true && tempGameover === false) {
     fill(0, 251, 255);
-    rect(shootaxis[0] - 1, shootaxis[1], 2, 20);
+    image(spaceshipbulletImage, shootaxis[0] - 5, shootaxis[1], 10, 20);
+    //rect(shootaxis[0] - 1, shootaxis[1], 2, 20);
     shootaxis[1] = shootaxis[1] - 20;
 
     if (shootaxis[1] < -20) {
@@ -310,7 +344,7 @@ function draw() {
     }
   }
     */
-
+if(tempGameover === false){
   if (shootingTick >= shootingThreshold) {
     let enemy = enemies[round(random(0, 4))];
     if (enemy[4] === true) {
@@ -320,6 +354,7 @@ function draw() {
   } else {
     shootingTick += 1;
   }
+}
 
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
@@ -465,16 +500,33 @@ function draw() {
     }
   }
   if (tempGameover === true) {
-    fill(252, 240, 237);
+    // lose transparent rect
+    fill(0, 0, 0, 200);
+    rect(400 / 2, height / 2 - 125, 400, 250);
+    textSize(40);
+    fill(245, 170, 10);
+    let content = "score: " + score;
+    let tWidth = textWidth(content);
+    text(content, width / 2 - tWidth / 2, height / 2 - 20);
+    fill(255, 0, 0);
+
     textStyle(BOLD);
-    text("Game Over", width / 2 - 50, height / 2);
-    text("Press R to restart the game", width / 2 - 125, height / 2 +50);
+    textSize(40);
+    text("You lose", width / 2 - 80, height / 2 - 90);
+
+    fill(255, 255, 255);
+    textStyle(BOLD);
+    textSize(20);
+    // text("Press C to continue", width / 2 - 100, (height / 2) + 30);
+    text("Press R to restart the game", width / 2 - 125, height / 2 + 50);
   }
 
-  //HUD
-  textStyle(NORMAL);
-  fill(0, 255, 0);
-  textSize(20);
-  text("score: " + score, 200, 15);
-  text("HP: " + count, 0, 15);
+  if (tempGameover === false) {
+    //HUD
+    textStyle(NORMAL);
+    fill(0, 255, 0);
+    textSize(20);
+    text("score: " + score, 200, 15);
+    text("HP: " + count, 0, 15);
+  }
 }
