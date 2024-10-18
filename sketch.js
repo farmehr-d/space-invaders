@@ -1,4 +1,5 @@
 let img;
+let ufoImage;
 let enemybulletImage;
 let spaceshipbulletImage;
 let enemy1Image;
@@ -71,7 +72,7 @@ class UFO {
     if (this.isDead === false) {
       noStroke();
       fill(235, 52, 210);
-      rect(this.x, this.y, this.width, this.height);
+      image(ufoImage, this.x, this.y, this.width, this.height)
     }
   }
 }
@@ -84,6 +85,7 @@ function preload() {
   spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
   enemy2Image = loadImage("assets/enemy2.png");
   enemybulletImage = loadImage("assets/enemybullet.png")
+  ufoImage =loadImage("assets/UFO.png") 
 }
 
 function enemySpawn() {
