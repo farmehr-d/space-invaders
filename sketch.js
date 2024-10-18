@@ -209,7 +209,7 @@ function draw() {
     }
   }
 
-  if (enemyExists === false) {
+  if (enemyExists === false && tempGameover === false) {
     // continue button
     if (keyIsDown(67) === true) {
       enemySpawn();
