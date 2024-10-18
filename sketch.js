@@ -81,7 +81,7 @@ class UFO {
 function preload() {
   img = loadImage("assets/Planet-hell-background.jpg");
   enemy1Image = loadImage("assets/Enemy1.png");
-  spaceshipImage = loadImage("assets/spaceship.png");
+  spaceshipImage = loadImage("assets/Spaceship2.png");
   spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
   enemy2Image = loadImage("assets/enemy2.png");
   enemybulletImage = loadImage("assets/enemybullet.png")
@@ -148,8 +148,10 @@ function draw() {
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
   fill(0, 0, 0, 90);
   rect(0, 0, width, height);
-  ufo.move();
-  ufo.show();
+  if(enemyExists === true){
+    ufo.move();
+    ufo.show();
+  }
 
   //shields
   if (ShieldExistence1 === true) {
