@@ -1,4 +1,5 @@
 let img;
+let enemybulletImage;
 let spaceshipbulletImage;
 let enemy1Image;
 let enemy2Image;
@@ -82,6 +83,7 @@ function preload() {
   spaceshipImage = loadImage("assets/spaceship.png");
   spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
   enemy2Image = loadImage("assets/enemy2.png");
+  enemybulletImage = loadImage("assets/enemybullet.png")
 }
 
 function enemySpawn() {
@@ -142,7 +144,7 @@ function draw() {
 
   // Draw the image and scale it to fit within the canvas.
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
-  fill(0, 0, 0, 30);
+  fill(0, 0, 0, 90);
   rect(0, 0, width, height);
   ufo.move();
   ufo.show();
@@ -359,9 +361,10 @@ if(tempGameover === false){
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
     fill(250, 250, 250);
-    //enemy rect
+    //enemy shoot rect
     if (existence === true) {
-      rect(enemybullet[0], enemybullet[1], 2, 15);
+      image(enemybulletImage,enemybullet[0],enemybullet[1], 6,18)
+      //rect(enemybullet[0], enemybullet[1], 2, 15);
     }
     enemybullet[1] = enemybullet[1] + 10;
     if (enemybullet[1] > 620) {
