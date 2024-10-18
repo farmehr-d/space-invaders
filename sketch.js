@@ -1,4 +1,5 @@
 let img;
+let shieldImage;
 let ufoImage;
 let enemybulletImage;
 let spaceshipbulletImage;
@@ -85,7 +86,8 @@ function preload() {
   spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
   enemy2Image = loadImage("assets/enemy2.png");
   enemybulletImage = loadImage("assets/enemybullet.png")
-  ufoImage =loadImage("assets/UFO.png") 
+  ufoImage =loadImage("assets/UFO.png")
+  shieldImage = loadImage("assets/shield.png")
 }
 
 function enemySpawn() {
@@ -156,33 +158,43 @@ function draw() {
   //shields
   if (ShieldExistence1 === true) {
     fill(213, 245, 221);
-    rect(ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
+    image(shieldImage,ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight)
+    //rect(ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
     textSize(20);
-    fill(37, 35, 122);
+    strokeWeight(2)
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
     text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
   }
 
   if (ShieldExistence2 === true) {
     fill(213, 245, 221);
-    rect(ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight);
+    image(shieldImage,ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight)
+    
     textSize(20);
-    fill(37, 35, 122);
+    strokeWeight(2)
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
     text(ShieldHP2, ShieldXaxis[1] + 30, shieldy + 20);
   }
 
   if (ShieldExistence3 === true) {
     fill(213, 245, 221);
-    rect(ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight);
+    image(shieldImage,ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight)
     textSize(20);
-    fill(37, 35, 122);
+    strokeWeight(2)
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
     text(ShieldHP3, ShieldXaxis[2] + 30, shieldy + 20);
   }
 
   if (ShieldExistence4 === true) {
     fill(213, 245, 221);
-    rect(ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight);
+    image(shieldImage,ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight)
     textSize(20);
-    fill(37, 35, 122);
+    strokeWeight(2)
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
     text(ShieldHP4, ShieldXaxis[3] + 30, shieldy + 20);
   }
 
