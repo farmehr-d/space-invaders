@@ -38,6 +38,8 @@ let ShieldHP2;
 let ShieldHP3;
 let ShieldHP4;
 let ufo;
+let music;
+let isGameStarted = false;
 
 class UFO {
   constructor() {
@@ -73,21 +75,22 @@ class UFO {
     if (this.isDead === false) {
       noStroke();
       fill(235, 52, 210);
-      image(ufoImage, this.x, this.y, this.width, this.height)
+      image(ufoImage, this.x, this.y, this.width, this.height);
     }
   }
 }
 
 // Load the image.
 function preload() {
-  img = loadImage("assets/Planet-hell-background.jpg");
+  img = loadImage("assets/Planet-hell-background2.jpg");
   enemy1Image = loadImage("assets/Enemy1.png");
   spaceshipImage = loadImage("assets/Spaceship2.png");
   spaceshipbulletImage = loadImage("assets/spaceshipbullet.png");
   enemy2Image = loadImage("assets/enemy2.png");
-  enemybulletImage = loadImage("assets/enemybullet.png")
-  ufoImage =loadImage("assets/UFO.png")
-  shieldImage = loadImage("assets/shield.png")
+  enemybulletImage = loadImage("assets/enemybullet.png");
+  ufoImage = loadImage("assets/UFO.png");
+  shieldImage = loadImage("assets/shield.png");
+  music = loadSound("assets/Planet-hell2.mp3");
 }
 
 function enemySpawn() {
@@ -98,8 +101,8 @@ function enemySpawn() {
       enemies.push([
         position2[0] + j * 70,
         position2[1] + i * 70,
-        35,
-        35,
+        50,
+        50,
         true,
       ]);
     }
@@ -109,14 +112,13 @@ function enemySpawn() {
 function setup() {
   createCanvas(800, 600);
   x = 400;
-  y = 575;
+  y = 555;
   speed = 5;
   enemyspeed = 3;
   direction = 1;
   shootaxis = [0, 1];
   shoot = false;
   position2 = [0, 40];
-
   //enemy bul variable
   eb = [];
   tempGameover = false;
@@ -145,12 +147,27 @@ function setup() {
 
 function draw() {
   background(0, 0, 0);
+  
+  if (!isGameStarted) {
+    fill(255,255,255)
+    textSize(40)
+    let content = "Press Space to start the game"
+    let contentWidth = textWidth(content)
+    text(content, (width/2) - (contentWidth/2),(height/2) - 10)
+    
+    if (keyIsDown(32) === true) {
+      isGameStarted = true;
+      music.loop();
+    }
+
+    return;
+  }
 
   // Draw the image and scale it to fit within the canvas.
   image(img, 0, 0, width, height, 0, 0, img.width, img.height, CONTAIN);
-  fill(0, 0, 0, 90);
+  fill(0, 0, 0, 100);
   rect(0, 0, width, height);
-  if(enemyExists === true){
+  if (enemyExists === true) {
     ufo.move();
     ufo.show();
   }
@@ -158,10 +175,10 @@ function draw() {
   //shields
   if (ShieldExistence1 === true) {
     fill(213, 245, 221);
-    image(shieldImage,ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight)
+    image(shieldImage, ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
     //rect(ShieldXaxis[0], shieldy, ShieldWidth, ShieldHeight);
     textSize(20);
-    strokeWeight(2)
+    strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
     text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
@@ -169,10 +186,10 @@ function draw() {
 
   if (ShieldExistence2 === true) {
     fill(213, 245, 221);
-    image(shieldImage,ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight)
-    
+    image(shieldImage, ShieldXaxis[1], shieldy, ShieldWidth, ShieldHeight);
+
     textSize(20);
-    strokeWeight(2)
+    strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
     text(ShieldHP2, ShieldXaxis[1] + 30, shieldy + 20);
@@ -180,9 +197,9 @@ function draw() {
 
   if (ShieldExistence3 === true) {
     fill(213, 245, 221);
-    image(shieldImage,ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight)
+    image(shieldImage, ShieldXaxis[2], shieldy, ShieldWidth, ShieldHeight);
     textSize(20);
-    strokeWeight(2)
+    strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
     text(ShieldHP3, ShieldXaxis[2] + 30, shieldy + 20);
@@ -190,9 +207,9 @@ function draw() {
 
   if (ShieldExistence4 === true) {
     fill(213, 245, 221);
-    image(shieldImage,ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight)
+    image(shieldImage, ShieldXaxis[3], shieldy, ShieldWidth, ShieldHeight);
     textSize(20);
-    strokeWeight(2)
+    strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
     text(ShieldHP4, ShieldXaxis[3] + 30, shieldy + 20);
@@ -241,11 +258,11 @@ function draw() {
 
     if (enemy[4] === true) {
       if (i < 5) {
-        image(enemy2Image, enemy[0], enemy[1], 35, 35);
+        image(enemy2Image, enemy[0], enemy[1], 50, 50);
         // fill(0, 0, 255);
       } else {
         // fill(255, 0, 0);
-        image(enemy1Image, enemy[0], enemy[1], 35, 35);
+        image(enemy1Image, enemy[0], enemy[1], 50, 50);
         // rect(enemy[0], enemy[1], enemy[2], enemy[3]);
       }
     }
@@ -309,6 +326,8 @@ function draw() {
   //reset button
   if (keyIsDown(82) === true) {
     setup();
+    music.stop();
+    music.loop();
   }
 
   //spaceship movement
@@ -330,7 +349,7 @@ function draw() {
   noStroke();
   if (tempGameover === false) {
     fill(0, 190, 0);
-    image(spaceshipImage, x - 30, y, 60, 20);
+    image(spaceshipImage, x - 30, y, 60, 60);
     //rect(x - 30, y, 60, 20);
   }
 
@@ -356,30 +375,30 @@ function draw() {
   // lower random() chooses which enemy is allowed to shoot
   /*
   if (random() < 0.01) {
-    let enemy = enemies[Math.round(random(0, 4))];
+    let enemy = enemies[...Math.round(random(0, 4))];
     if (enemy[4] === true) {
       eb.push([...enemy]);
     }
   }
     */
-if(tempGameover === false){
-  if (shootingTick >= shootingThreshold) {
-    let enemy = enemies[round(random(0, 4))];
-    if (enemy[4] === true) {
-      eb.push([enemy[0] + enemy[2] / 2, enemy[1] + enemy[3] / 2]);
-      shootingTick = random(0, shootingThreshold / 2);
+  if (tempGameover === false) {
+    if (shootingTick >= shootingThreshold) {
+      let enemy = enemies[round(random(0, 4))];
+      if (enemy[4] === true) {
+        eb.push([enemy[0] + enemy[2] / 2, enemy[1] + enemy[3] / 2]);
+        shootingTick = random(0, shootingThreshold / 2);
+      }
+    } else {
+      shootingTick += 1;
     }
-  } else {
-    shootingTick += 1;
   }
-}
 
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
     fill(250, 250, 250);
     //enemy shoot rect
     if (existence === true) {
-      image(enemybulletImage,enemybullet[0],enemybullet[1], 6,18)
+      image(enemybulletImage, enemybullet[0], enemybullet[1], 6, 18);
       //rect(enemybullet[0], enemybullet[1], 2, 15);
     }
     enemybullet[1] = enemybullet[1] + 10;
@@ -507,8 +526,8 @@ if(tempGameover === false){
     if (
       enemybullet[0] >= x - 30 &&
       enemybullet[0] <= x + 30 &&
-      enemybullet[1] >= y &&
-      enemybullet[1] <= y + 20
+      enemybullet[1] >= y + 10 &&
+      enemybullet[1] <= y + 30
     ) {
       eb.splice(i, 1);
       count = count - 1;
