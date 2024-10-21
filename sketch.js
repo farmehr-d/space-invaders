@@ -147,14 +147,14 @@ function setup() {
 
 function draw() {
   background(0, 0, 0);
-  
+
   if (!isGameStarted) {
-    fill(255,255,255)
-    textSize(40)
-    let content = "Press Space to start the game"
-    let contentWidth = textWidth(content)
-    text(content, (width/2) - (contentWidth/2),(height/2) - 10)
-    
+    fill(255, 255, 255);
+    textSize(40);
+    let content = "Press Space to start the game";
+    let contentWidth = textWidth(content);
+    text(content, width / 2 - contentWidth / 2, height / 2 - 10);
+
     if (keyIsDown(32) === true) {
       isGameStarted = true;
       music.loop();
@@ -395,6 +395,11 @@ function draw() {
 
   for (let i = 0; i < eb.length; i++) {
     let enemybullet = eb[i];
+
+    if (enemyExists === false) {
+      eb.splice(i, 1);
+    }
+
     fill(250, 250, 250);
     //enemy shoot rect
     if (existence === true) {
