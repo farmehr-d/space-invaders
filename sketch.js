@@ -151,11 +151,11 @@ function draw() {
   if (!isGameStarted) {
     fill(255, 255, 255);
     textSize(40);
-    let content = "Press Space to start the game";
+    let content = "Press Enter to start the game";
     let contentWidth = textWidth(content);
     text(content, width / 2 - contentWidth / 2, height / 2 - 10);
 
-    if (keyIsDown(32) === true) {
+    if (keyIsDown(13) === true) {
       isGameStarted = true;
       music.loop();
     }
@@ -250,6 +250,7 @@ function draw() {
     fill(255, 255, 255);
     textSize(20);
     text("Press R to restart the game", width / 2 - 125, height / 2 + 60);
+    shoot = false
   }
 
   //enemy render
