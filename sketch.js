@@ -360,7 +360,7 @@ function draw() {
     //rect(shootaxis[0] - 1, shootaxis[1], 2, 20);
     shootaxis[1] = shootaxis[1] - 20;
 
-    if (shootaxis[1] < -20) {
+    if (shootaxis[1] < -20 || enemyExists === false) {
       shoot = false;
     }
 
