@@ -183,7 +183,6 @@ function draw() {
     fill(255, 255, 255);
     textStyle(BOLD);
     text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
-    
   }
 
   if (ShieldExistence2 === true) {
@@ -338,22 +337,11 @@ function draw() {
 
   //spaceship movement
 
-  if (keyIsDown(LEFT_ARROW) === false) {
-    if (keyIsDown(65) === true && x > 30) {
-      x -= speed;
-    }
-  }
-  if (keyIsDown(LEFT_ARROW) === true && x > 30) {
+  if ((keyIsDown(LEFT_ARROW) === true || keyIsDown(65) === true) && x > 30) {
     x -= speed;
   }
 
-  if (keyIsDown(RIGHT_ARROW) === false) {
-    if (keyIsDown(68) === true && x < 775) {
-      x += speed;
-    }
-  }
-
-  if (keyIsDown(RIGHT_ARROW) === true && x < 775) {
+  if ((keyIsDown(RIGHT_ARROW) === true || keyIsDown(68) === true) && x < 775) {
     x += speed;
   }
 
