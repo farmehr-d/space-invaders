@@ -182,7 +182,8 @@ function draw() {
     stroke(0, 0, 0);
     fill(255, 255, 255);
     textStyle(BOLD);
-    text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
+    let hpTextWidth = textWidth(ShieldHP1);
+    text(ShieldHP1, ShieldXaxis[0] + 36 - hpTextWidth / 2, shieldy + 20);
   }
 
   if (ShieldExistence2 === true) {
@@ -194,7 +195,8 @@ function draw() {
     stroke(0, 0, 0);
     fill(255, 255, 255);
     textStyle(BOLD);
-    text(ShieldHP2, ShieldXaxis[1] + 30, shieldy + 20);
+    let hpTextWidth = textWidth(ShieldHP2);
+    text(ShieldHP2, ShieldXaxis[1] + 36 - hpTextWidth / 2, shieldy + 20);
   }
 
   if (ShieldExistence3 === true) {
@@ -205,7 +207,8 @@ function draw() {
     stroke(0, 0, 0);
     fill(255, 255, 255);
     textStyle(BOLD);
-    text(ShieldHP3, ShieldXaxis[2] + 30, shieldy + 20);
+    let hpTextWidth = textWidth(ShieldHP3);
+    text(ShieldHP3, ShieldXaxis[2] + 36 - hpTextWidth / 2, shieldy + 20);
   }
 
   if (ShieldExistence4 === true) {
@@ -216,7 +219,8 @@ function draw() {
     stroke(0, 0, 0);
     fill(255, 255, 255);
     textStyle(BOLD);
-    text(ShieldHP4, ShieldXaxis[3] + 30, shieldy + 20);
+    let hpTextWidth = textWidth(ShieldHP4);
+    text(ShieldHP4, ShieldXaxis[3] + 36 - hpTextWidth / 2, shieldy + 20);
   }
 
   // the value of enemy existence is being reset
