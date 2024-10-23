@@ -181,6 +181,7 @@ function draw() {
     strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
+    textStyle(BOLD);
     text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
     
   }
@@ -193,6 +194,7 @@ function draw() {
     strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
+    textStyle(BOLD);
     text(ShieldHP2, ShieldXaxis[1] + 30, shieldy + 20);
   }
 
@@ -203,6 +205,7 @@ function draw() {
     strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
+    textStyle(BOLD);
     text(ShieldHP3, ShieldXaxis[2] + 30, shieldy + 20);
   }
 
@@ -213,6 +216,7 @@ function draw() {
     strokeWeight(2);
     stroke(0, 0, 0);
     fill(255, 255, 255);
+    textStyle(BOLD);
     text(ShieldHP4, ShieldXaxis[3] + 30, shieldy + 20);
   }
 
