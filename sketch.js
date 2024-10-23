@@ -137,10 +137,10 @@ function setup() {
   ShieldWidth = 70;
   ShieldHeight = 25;
   score = 0;
-  ShieldHP1 = 4;
-  ShieldHP2 = 4;
-  ShieldHP3 = 4;
-  ShieldHP4 = 4;
+  ShieldHP1 = 10;
+  ShieldHP2 = 10;
+  ShieldHP3 = 10;
+  ShieldHP4 = 10;
 
   enemySpawn();
 }
@@ -182,6 +182,7 @@ function draw() {
     stroke(0, 0, 0);
     fill(255, 255, 255);
     text(ShieldHP1, ShieldXaxis[0] + 30, shieldy + 20);
+    
   }
 
   if (ShieldExistence2 === true) {
@@ -250,7 +251,7 @@ function draw() {
     fill(255, 255, 255);
     textSize(20);
     text("Press R to restart the game", width / 2 - 125, height / 2 + 60);
-    shoot = false
+    shoot = false;
   }
 
   //enemy render
@@ -332,8 +333,20 @@ function draw() {
   }
 
   //spaceship movement
+
+  if (keyIsDown(LEFT_ARROW) === false) {
+    if (keyIsDown(65) === true && x > 30) {
+      x -= speed;
+    }
+  }
   if (keyIsDown(LEFT_ARROW) === true && x > 30) {
     x -= speed;
+  }
+
+  if (keyIsDown(RIGHT_ARROW) === false) {
+    if (keyIsDown(68) === true && x < 775) {
+      x += speed;
+    }
   }
 
   if (keyIsDown(RIGHT_ARROW) === true && x < 775) {
@@ -470,7 +483,6 @@ function draw() {
         ShieldExistence4 = false;
       }
     }
-   
 
     // enemy shoots me
     if (
@@ -488,79 +500,76 @@ function draw() {
     }
   }
 
+  // spacship shoots shields
 
-
- // spacship shoots shields
-
- if (ShieldExistence1 === true) {
-  if (
-    shootaxis[0] >= ShieldXaxis[0] &&
-    shootaxis[0] <= ShieldXaxis[0] + ShieldWidth &&
-    shootaxis[1] <= shieldy + ShieldHeight / 2
-  )
-    if (shoot === true) {
-      {
-        shoot = false;
-        ShieldHP1 = ShieldHP1 - 1;
+  if (ShieldExistence1 === true) {
+    if (
+      shootaxis[0] >= ShieldXaxis[0] &&
+      shootaxis[0] <= ShieldXaxis[0] + ShieldWidth &&
+      shootaxis[1] <= shieldy + ShieldHeight / 2
+    )
+      if (shoot === true) {
+        {
+          shoot = false;
+          ShieldHP1 = ShieldHP1 - 1;
+        }
       }
-    }
 
     if (ShieldHP1 === 0) {
       ShieldExistence1 = false;
     }
-}
+  }
 
-if (ShieldExistence2 === true) {
-  if (
-    shootaxis[0] >= ShieldXaxis[1] &&
-    shootaxis[0] <= ShieldXaxis[1] + ShieldWidth &&
-    shootaxis[1] <= shieldy + ShieldHeight / 2
-  )
-    if (shoot === true) {
-      {
-        shoot = false;
-        ShieldHP2 = ShieldHP2 - 1;
+  if (ShieldExistence2 === true) {
+    if (
+      shootaxis[0] >= ShieldXaxis[1] &&
+      shootaxis[0] <= ShieldXaxis[1] + ShieldWidth &&
+      shootaxis[1] <= shieldy + ShieldHeight / 2
+    )
+      if (shoot === true) {
+        {
+          shoot = false;
+          ShieldHP2 = ShieldHP2 - 1;
+        }
       }
-    }
     if (ShieldHP2 === 0) {
       ShieldExistence2 = false;
     }
-}
+  }
 
-if (ShieldExistence3 === true) {
-  if (
-    shootaxis[0] >= ShieldXaxis[2] &&
-    shootaxis[0] <= ShieldXaxis[2] + ShieldWidth &&
-    shootaxis[1] <= shieldy + ShieldHeight / 2
-  )
-    if (shoot === true) {
-      {
-        shoot = false;
-        ShieldHP3 = ShieldHP3 - 1;
+  if (ShieldExistence3 === true) {
+    if (
+      shootaxis[0] >= ShieldXaxis[2] &&
+      shootaxis[0] <= ShieldXaxis[2] + ShieldWidth &&
+      shootaxis[1] <= shieldy + ShieldHeight / 2
+    )
+      if (shoot === true) {
+        {
+          shoot = false;
+          ShieldHP3 = ShieldHP3 - 1;
+        }
       }
-    }
     if (ShieldHP3 === 0) {
       ShieldExistence3 = false;
     }
-}
+  }
 
-if (ShieldExistence4 === true) {
-  if (
-    shootaxis[0] >= ShieldXaxis[3] &&
-    shootaxis[0] <= ShieldXaxis[3] + ShieldWidth &&
-    shootaxis[1] <= shieldy + ShieldHeight / 2
-  )
-    if (shoot === true) {
-      {
-        shoot = false;
-        ShieldHP4 = ShieldHP4 - 1;
+  if (ShieldExistence4 === true) {
+    if (
+      shootaxis[0] >= ShieldXaxis[3] &&
+      shootaxis[0] <= ShieldXaxis[3] + ShieldWidth &&
+      shootaxis[1] <= shieldy + ShieldHeight / 2
+    )
+      if (shoot === true) {
+        {
+          shoot = false;
+          ShieldHP4 = ShieldHP4 - 1;
+        }
       }
-    }
     if (ShieldHP4 === 0) {
       ShieldExistence4 = false;
     }
-}
-
+  }
 
   if (tempGameover === true) {
     // lose transparent rect
